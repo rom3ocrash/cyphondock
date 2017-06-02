@@ -48,15 +48,6 @@ services:
       - cyphon
       - rabbit
 
-  # Cyclops UI for Cyphon
-  cyclops:
-    image: dunbar/cyclops:${CYCLOPS_VER}
-    restart: always
-    links:
-      - nginx
-    depends_on:
-      - nginx
-
   # Cyphon Engine
   cyphon:
     extends:
