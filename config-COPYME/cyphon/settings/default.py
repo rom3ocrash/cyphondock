@@ -256,6 +256,7 @@ REQUIREMENTS = os.path.join(os.path.dirname(BASE_DIR),
 
 ALLOWED_HOSTS = HOST_SETTINGS['ALLOWED_HOSTS']
 CORS_ORIGIN_WHITELIST = HOST_SETTINGS['CORS_ORIGIN_WHITELIST']
+LOGIN_REDIRECT_URL = '/app/'
 
 DATABASES = {
     'default': {
@@ -296,7 +297,7 @@ TEST = 'test' in sys.argv
 INSTALLED_APPS = (
     'cyphon',  # must come before django.contrib.admin to override templates
     'autocomplete_light',  # must come before django.contrib.admin
-    'django.contrib.admindocs',
+    # 'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.gis',
@@ -339,6 +340,7 @@ INSTALLED_APPS = (
     'codebooks',
     'companies',
     'contexts',
+    'cyclops',
     'cyphon.settings',
     'distilleries',
     'httmock',
