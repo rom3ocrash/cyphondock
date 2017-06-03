@@ -14,6 +14,7 @@ before_script:
   - sleep 30  # wait for PostgreSQl and Elasticsearch to start
 
 script:
+  - docker exec cyphondock_cyphon_1 rm -f __init__.py
   - docker exec cyphondock_cyphon_1 python manage.py migrate contenttypes
   # Make sure starter fixtures can load successfully and all tests pass.
   # Run tests with --keepdb to avoid OperationalError during teardown, in case
