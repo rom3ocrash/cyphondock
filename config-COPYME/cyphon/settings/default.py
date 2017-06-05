@@ -192,7 +192,6 @@ MONGODB = {
 }
 
 NOTIFICATIONS = {
-    'ENABLED': False,
     'PUSH_NOTIFICATION_KEY': '',
     'GCM_SENDER_ID': '',
     'IGNORED_ALERT_LEVELS': ['INFO'],
