@@ -113,6 +113,7 @@ INSTALLED_APPS = (
     'codebooks',
     'companies',
     'contexts',
+    'cyclops',
     'cyphon.settings',
     'distilleries',
     'httmock',
@@ -232,6 +233,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(HOME_DIR, 'static')
+
+STATICFILES_DIRS = []
+
+if CYCLOPS['LOCAL_ASSETS_ENABLED']:
+    STATICFILES_DIRS += [
+        (CYCLOPS['LOCAL_FOLDER_NAME'], CYCLOPS['LOCAL_ASSETS_PATH']),
+    ]
 
 MEDIA_URL = '/media/'
 

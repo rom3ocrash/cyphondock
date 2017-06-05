@@ -2,16 +2,6 @@ version: '2'
 
 services:
 
-  # # cAdvisor dashboard for container metrics
-  # cadvisor:
-  #   image: google/cadvisor:${CADVISOR_VER}
-  #   restart: always
-  #   volumes:
-  #     - /:/rootfs:ro
-  #     - /var/run:/var/run:rw
-  #     - /sys:/sys:ro
-  #     - /var/lib/docker/:/var/lib/docker:ro
-
   # Celery beat for Cyphon
   celerybeat:
     extends:
@@ -47,15 +37,6 @@ services:
     depends_on:
       - cyphon
       - rabbit
-
-  # Cyclops UI for Cyphon
-  cyclops:
-    image: dunbar/cyclops:${CYCLOPS_VER}
-    restart: always
-    links:
-      - nginx
-    depends_on:
-      - nginx
 
   # Cyphon Engine
   cyphon:
@@ -159,7 +140,6 @@ services:
     volumes_from:
       - cyphon
     links:
-      # - cadvisor
       - cyphon
       - kibana
       - rabbit
