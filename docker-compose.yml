@@ -61,7 +61,10 @@ services:
     environment:
       - http.host=0.0.0.0
       - transport.host=127.0.0.1
+    ports:
+      - "9200:9200"
     volumes:
+      - esdata1:/usr/share/elasticsearch/data
       - ./config/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - ./config/elasticsearch/jvm.options:/usr/share/elasticsearch/config/jvm.options:ro
       - ./config/elasticsearch/log4j2.properties:/usr/share/elasticsearch/config/log4j2.properties:ro
@@ -111,10 +114,11 @@ services:
 
   # Logstash log ingestion
   logstash:
-    image: docker.elastic.co/logstash/logstash:${ELASTIC_VER}
+    build: images/logstash-cloudwatch
     restart: always
     command: logstash -f /usr/share/logstash/pipeline --config.reload.automatic
     volumes:
+      - ~/.aws/credentials:/usr/share/logstash/.aws/credentials
       - ./config/logstash/config:/usr/share/logstash/config:ro
       - ./config/logstash/patterns:/usr/share/logstash/patterns:ro
       - ./config/logstash/pipeline:/usr/share/logstash/pipeline:ro
@@ -211,3 +215,7 @@ services:
     depends_on:
       - cyphon
       - rabbit
+
+volumes:
+  esdata1:
+    driver: local
