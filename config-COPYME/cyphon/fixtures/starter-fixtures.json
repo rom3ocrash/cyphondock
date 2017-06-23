@@ -219,6 +219,20 @@
   }
 },
 {
+  "model": "datasieves.datarule",
+  "pk": 9,
+  "fields": {
+    "name": "type_equals_cloudwatch",
+    "protocol": null,
+    "value": "cloudwatch",
+    "is_regex": false,
+    "case_sensitive": false,
+    "negate": false,
+    "operator": "CharField:^x$",
+    "field_name": "type"
+  }
+},
+{
   "model": "datasieves.datasieve",
   "fields": {
     "name": "high_priority",
@@ -291,6 +305,14 @@
   }
 },
 {
+  "model": "datasieves.datasieve",
+  "fields": {
+    "name": "type_equals_cloudwatch",
+    "logic": "OR",
+    "negate": false
+  }
+},
+{
   "model": "datasieves.datasievenode",
   "fields": {
     "sieve": ["unclassified_mail"],
@@ -339,6 +361,17 @@
   "fields": {
     "sieve": ["intel"],
     "object_id": 8,
+    "content_type": [
+      "datasieves",
+      "datarule"
+    ]
+  }
+},
+{
+  "model": "datasieves.datasievenode",
+  "fields": {
+    "sieve": ["type_equals_cloudwatch"],
+    "object_id": 9,
     "content_type": [
       "datasieves",
       "datarule"
@@ -442,7 +475,7 @@
   "model": "mailsieves.mailsievenode",
   "fields": {
     "sieve": ["all_mail"],
-    "object_id": 2,   
+    "object_id": 2,
     "content_type": [
       "mailsieves",
       "mailrule"
@@ -2087,6 +2120,146 @@
   }
 },
 {
+  "model": "bottles.bottlefield",
+  "fields": {
+    "field_name": "average",
+    "field_type": "FloatField",
+    "target_type": null,
+    "embedded_doc": null
+  }
+},
+{
+  "model": "bottles.bottlefield",
+  "fields": {
+    "field_name": "period",
+    "field_type": "IntegerField",
+    "target_type": null,
+    "embedded_doc": null
+  }
+},
+{
+  "model": "bottles.bottlefield",
+  "fields": {
+    "field_name": "InstanceId",
+    "field_type": "CharField",
+    "target_type": null,
+    "embedded_doc": null
+  }
+},
+{
+  "model": "bottles.bottlefield",
+  "fields": {
+    "field_name": "end_time",
+    "field_type": "DateTimeField",
+    "target_type": "DateTime",
+    "embedded_doc": null
+  }
+},
+{
+  "model": "bottles.bottlefield",
+  "fields": {
+    "field_name": "sum",
+    "field_type": "FloatField",
+    "target_type": null,
+    "embedded_doc": null
+  }
+},
+{
+  "model": "bottles.bottlefield",
+  "fields": {
+    "field_name": "start_time",
+    "field_type": "DateTimeField",
+    "target_type": "DateTime",
+    "embedded_doc": null
+  }
+},
+{
+  "model": "bottles.bottlefield",
+  "fields": {
+    "field_name": "unit",
+    "field_type": "CharField",
+    "target_type": null,
+    "embedded_doc": null
+  }
+},
+{
+  "model": "bottles.bottlefield",
+  "fields": {
+    "field_name": "metric_name",
+    "field_type": "CharField",
+    "target_type": null,
+    "embedded_doc": null
+  }
+},
+{
+  "model": "bottles.bottlefield",
+  "fields": {
+    "field_name": "sample_count",
+    "field_type": "IntegerField",
+    "target_type": null,
+    "embedded_doc": null
+  }
+},
+{
+  "model": "bottles.bottlefield",
+  "fields": {
+    "field_name": "namespace",
+    "field_type": "CharField",
+    "target_type": null,
+    "embedded_doc": null
+  }
+},
+{
+  "model": "bottles.bottlefield",
+  "fields": {
+    "field_name": "maximum",
+    "field_type": "FloatField",
+    "target_type": null,
+    "embedded_doc": null
+  }
+},
+{
+  "model": "bottles.bottlefield",
+  "fields": {
+    "field_name": "minimum",
+    "field_type": "FloatField",
+    "target_type": null,
+    "embedded_doc": null
+  }
+},
+{
+  "model": "bottles.bottlefield",
+  "fields": {
+    "field_name": "summary",
+    "field_type": "CharField",
+    "target_type": null,
+    "embedded_doc": null
+  }
+},
+{
+  "model": "bottles.bottle",
+  "fields": {
+    "name": "cloudwatch_ec2",
+    "fields": [
+      ["@timestamp"],
+      ["InstanceId"],
+      ["average"],
+      ["end_time"],
+      ["maximum"],
+      ["metric_name"],
+      ["minimum"],
+      ["namespace"],
+      ["period"],
+      ["sample_count"],
+      ["start_time"],
+      ["sum"],
+      ["summary"],
+      ["type"],
+      ["unit"]
+    ]
+  }
+},
+{
   "model": "bottles.bottle",
   "fields": {
     "name": "dhcp_log",
@@ -2480,6 +2653,14 @@
   }
 },
 {
+  "model": "containers.container",
+  "fields": {
+    "name": "cloudwatch_ec2",
+    "bottle": ["cloudwatch_ec2"],
+    "label": null
+  }
+},
+{
   "model": "warehouses.warehouse",
   "fields": {
     "backend": "elasticsearch",
@@ -2808,6 +2989,20 @@
   }
 },
 {
+  "model": "tastes.taste",
+  "fields": {
+    "container": ["cloudwatch_ec2"],
+    "author": "InstanceId",
+    "title": "summary",
+    "content": "",
+    "location": "",
+    "location_format": "LNG/LAT",
+    "datetime": "@timestamp",
+    "date_string": "",
+    "date_format": ""
+  }
+},
+{
   "model": "datacondensers.dataparser",
   "pk": 1,
   "fields": {
@@ -2970,7 +3165,7 @@
   "fields": {
     "condenser": ["twitter__content"],
     "target_field": ["image"],
-    "object_id": 4, 
+    "object_id": 4,
     "content_type": [
       "datacondensers",
       "dataparser"
@@ -2979,7 +3174,7 @@
 },
 {
   "model": "datacondensers.datafitting",
-  "fields": { 
+  "fields": {
     "condenser": ["twitter__content"],
     "target_field": ["link"],
     "object_id": 5,
@@ -3869,6 +4064,14 @@
   }
 },
 {
+  "model": "watchdogs.watchdog",
+  "fields": {
+    "name": "cloudwatch",
+    "enabled": true,
+    "groups": []
+  }
+},
+{
   "model": "watchdogs.trigger",
   "fields": {
     "watchdog": ["email"],
@@ -3947,6 +4150,15 @@
     "sieve": ["info_priority"],
     "alert_level": "INFO",
     "rank": 30
+  }
+},
+{
+  "model": "watchdogs.trigger",
+  "fields": {
+    "watchdog": ["cloudwatch"],
+    "sieve": ["type_equals_cloudwatch"],
+    "alert_level": "INFO",
+    "rank": 0
   }
 },
 {
