@@ -107,37 +107,42 @@ filebeat.prospectors:
 
 - input_type: log
   paths:
-    - /var/log/bro/dhcp.log
+    - /nsm/bro/logs/current/dhcp.log
   document_type: dhcp
 
 - input_type: log
   paths:
-    - /var/log/bro/dns.log
+    - /nsm/bro/logs/current/dns.log
   document_type: dns
 
 - input_type: log
   paths:
-    - /var/log/bro/files.log
+    - /nsm/bro/logs/current/files.log
   document_type: files
 
 - input_type: log
   paths:
-    - /var/log/bro/http.log
+    - /nsm/bro/logs/current/ftp.log
+  document_type: ftp
+
+- input_type: log
+  paths:
+    - /nsm/bro/logs/current/http.log
   document_type: http
 
 - input_type: log
   paths:
-    - /var/log/bro/intel.log
+    - /nsm/bro/logs/current/intel.log
   document_type: intel
 
 - input_type: log
   paths:
-    - /var/log/bro/smtp.log
+    - /nsm/bro/logs/current/smtp.log
   document_type: smtp
 
 - input_type: log
   paths:
-    - /var/log/bro/ssl.log
+    - /nsm/bro/logs/current/ssl.log
   document_type: ssl
 
 - input_type: log
