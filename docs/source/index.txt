@@ -1,0 +1,19 @@
+########################
+Cyphondock documentation
+########################
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   installing-docker
+   installing-cyphon
+   compose
+
+******************
+Indices and tables
+******************
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
