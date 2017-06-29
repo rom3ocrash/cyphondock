@@ -8,48 +8,26 @@ version: '2'
 
 services:
 
-  cadvisor:
-    ports:
-      - "8080:8080"
-
-  cyclops:
-    env_file:
-      - ./config/env/cyclops.env
-    volumes:
-      - ./config/env/cyclops.env:/usr/src/app/cyclops/cyclops.env
-
-  cyphon:
-    volumes:
-      - /opt/cyphon/media:/usr/src/app/cyphon/media
-      - /opt/cyphon/keys:/usr/src/app/cyphon/keys
-
   elasticsearch:
     volumes:
       - /opt/cyphon/data/elasticsearch:/usr/share/elasticsearch/data
-
-  kibana:
-    ports:
-      - "5601:5601"
 
   logstash:
     ports:
       - "5044:5044"
       - "5045:5045"  # you can configure Filebeat to send Nessus files here
-      - "5000:5000/udp"
 
-  mongo:
-    volumes:
-      - /opt/cyphon/data/mongodb:/data/db
+  # mongo:
+  #   volumes:
+  #     - /opt/cyphon/data/mongodb:/data/db
 
   nginx:
     ports:
-      - "80:80"
-      - "443:443"
+      - "80:80"        # Cyphon
+      - "443:443"      # Cyphon
+      - "5601:5601"    # Kibana
+      - "15672:15672"  # RabbitMQ management plugin
 
   postgres:
     volumes:
       - /opt/cyphon/data/postgresql:/var/lib/postgresql/data
-
-  rabbit:
-    ports:
-      - "15672:15672"  # RabbitMQ management plugin

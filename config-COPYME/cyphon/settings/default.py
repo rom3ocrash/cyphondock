@@ -31,14 +31,11 @@ SECRET_KEY = 'this-should-be-a-string-of-random-characters'
 
 HOST_SETTINGS = {
     'ALLOWED_HOSTS': [
-        # 'cyphon.example.com',
         'localhost',
         'cyphon',
     ],
     'CORS_ORIGIN_WHITELIST': [
-        # 'cyclops.example.com',
         'localhost:8000',
-        'cyclops:3000',
         'cyphon:8000',
         'nginx:80',
     ],
@@ -73,6 +70,23 @@ APPUSERS = {
 CODEBOOKS = {
     'CODENAME_PREFIX': '**',  # prefix for displayed CodeNames
     'CODENAME_SUFFIX': '**',  # suffix for displayed CodeNames
+}
+
+CYCLOPS = {
+    'ENABLED': True,
+    'VERSION': '0.4.0',
+    'CDN_FORMAT': 'https://cdn.rawgit.com/dunbarcyber/cyclops/{0}/dist/cyclops.{1}',
+    'MAPBOX_ACCESS_TOKEN': '',
+    'LOCAL_ASSETS_ENABLED': False,
+    'LOCAL_ASSETS_PATH': os.path.abspath(os.path.join(PROJ_DIR, '../../cyclops/dist')),
+    'LOCAL_FOLDER_NAME': 'cyclops',
+    'LOCAL_CSS_FILENAME': 'cyclops.css',
+    'LOCAL_JS_FILENAME': 'cyclops.js',
+}
+
+DATASIFTER = {
+    'DEFAULT_MUNGER': 'default',
+    'DEFAULT_MUNGER_ENABLED': True,
 }
 
 DISTILLERIES = {
@@ -157,13 +171,13 @@ JIRA = {
 }
 
 LOGSIFTER = {
-    'DEFAULT_LOG_MUNGER': 'default_log',
-    'DEFAULT_LOG_CHUTE_ENABLED': True,
+    'DEFAULT_MUNGER': 'default',
+    'DEFAULT_MUNGER_ENABLED': True,
 }
 
 MAILSIFTER = {
-    'DEFAULT_MAIL_MUNGER': 'default_mail',
-    'DEFAULT_MAIL_CHUTE_ENABLED': True,
+    'DEFAULT_MUNGER': 'default',
+    'DEFAULT_MUNGER_ENABLED': True,
     'MAIL_COLLECTION': 'postgresql.django_cyphon.django_mailbox_message',
     'EMAIL_CONTENT_PREFERENCES': ('text/plain', 'text/html'),
     'ALLOWED_EMAIL_ATTACHMENTS': ('text/plain', 'application/pdf', 'image/jpeg', 'image/png'),
@@ -179,6 +193,7 @@ MONGODB = {
 
 NOTIFICATIONS = {
     'PUSH_NOTIFICATION_KEY': '',
+    'GCM_SENDER_ID': '',
     'IGNORED_ALERT_LEVELS': ['INFO'],
 }
 
@@ -197,15 +212,13 @@ PRIVATE_FIELDS = [
 ]
 
 RABBITMQ = {
-    'EXCHANGE': 'cyphon',
-    'EXCHANGE_TYPE': 'direct',
-    'ROUTING_KEY': 'logstash',
-    'QUEUE_NAME': 'logstash',
-    'DURABLE': True,
     'HOST': os.getenv('RABBITMQ_DEFAULT_HOST', 'rabbit'),
     'VHOST': os.getenv('RABBITMQ_DEFAULT_VHOST', 'cyphon'),
     'USERNAME': os.getenv('RABBITMQ_DEFAULT_USER', 'guest'),
     'PASSWORD': os.getenv('RABBITMQ_DEFAULT_PASS', 'guest'),
+    'EXCHANGE': 'cyphon',
+    'EXCHANGE_TYPE': 'direct',
+    'DURABLE': True,
 }
 
 SAUCELABS = {
@@ -242,6 +255,7 @@ REQUIREMENTS = os.path.join(os.path.dirname(BASE_DIR),
 
 ALLOWED_HOSTS = HOST_SETTINGS['ALLOWED_HOSTS']
 CORS_ORIGIN_WHITELIST = HOST_SETTINGS['CORS_ORIGIN_WHITELIST']
+LOGIN_REDIRECT_URL = '/app/'
 
 DATABASES = {
     'default': {
@@ -282,7 +296,7 @@ TEST = 'test' in sys.argv
 INSTALLED_APPS = (
     'cyphon',  # must come before django.contrib.admin to override templates
     'autocomplete_light',  # must come before django.contrib.admin
-    'django.contrib.admindocs',
+    # 'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.gis',
@@ -325,6 +339,7 @@ INSTALLED_APPS = (
     'codebooks',
     'companies',
     'contexts',
+    'cyclops',
     'cyphon.settings',
     'distilleries',
     'httmock',
@@ -443,6 +458,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(HOME_DIR, 'static')
+
+STATICFILES_DIRS = []
+
+if CYCLOPS['LOCAL_ASSETS_ENABLED']:
+    STATICFILES_DIRS += [
+        (CYCLOPS['LOCAL_FOLDER_NAME'], CYCLOPS['LOCAL_ASSETS_PATH']),
+    ]
 
 MEDIA_URL = '/media/'
 

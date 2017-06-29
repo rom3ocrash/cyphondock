@@ -3,8 +3,8 @@
 # Xms represents the initial size of total heap space
 # Xmx represents the maximum size of total heap space
 
--Xms256m
--Xmx4g
+-Xms1g
+-Xmx2g
 
 ################################################################
 ## Expert settings
@@ -27,7 +27,7 @@
 # disable calls to System#gc
 -XX:+DisableExplicitGC
 
-## locale
+## Locale
 # Set the locale language
 #-Duser.language=en
 

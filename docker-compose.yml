@@ -2,16 +2,6 @@ version: '2'
 
 services:
 
-  # cAdvisor dashboard for container metrics
-  cadvisor:
-    image: google/cadvisor:${CADVISOR_VER}
-    restart: always
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:rw
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-
   # Celery beat for Cyphon
   celerybeat:
     extends:
@@ -23,7 +13,7 @@ services:
       - geoip
     links:
       - elasticsearch
-      - mongo
+      # - mongo
       - postgres
       - rabbit
     depends_on:
@@ -41,21 +31,12 @@ services:
       - geoip
     links:
       - elasticsearch
-      - mongo
+      # - mongo
       - postgres
       - rabbit
     depends_on:
       - cyphon
       - rabbit
-
-  # Cyclops UI for Cyphon
-  cyclops:
-    image: dunbar/cyclops:${CYCLOPS_VER}
-    restart: always
-    links:
-      - nginx
-    depends_on:
-      - nginx
 
   # Cyphon Engine
   cyphon:
@@ -68,17 +49,33 @@ services:
       - geoip
     links:
       - elasticsearch
-      - mongo
+      # - mongo
       - postgres
     depends_on:
       - postgres
 
   # Elasticsearch storage backend
   elasticsearch:
-    image: elasticsearch:${ELASTICSEARCH_VER}
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTIC_VER}
     restart: always
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=127.0.0.1
     volumes:
       - ./config/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - ./config/elasticsearch/jvm.options:/usr/share/elasticsearch/config/jvm.options:ro
+      - ./config/elasticsearch/log4j2.properties:/usr/share/elasticsearch/config/log4j2.properties:ro
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:${ELASTIC_VER}
+    restart: always
+    links:
+      - logstash
+    depends_on:
+      - logstash
+    volumes:
+      - ./config/beats/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:rw
+      - ./log:/var/log
 
   # GeoLite2 databases for geolocating IP addresses
   geoip:
@@ -87,7 +84,7 @@ services:
 
   # Kibana dashboard for Elasticsearch data
   kibana:
-    image: kibana:${KIBANA_VER}
+    image: docker.elastic.co/kibana/kibana:${ELASTIC_VER}
     restart: always
     environment:
       LOGSPOUT: ignore  # don't send Kibana's logs to Logspout
@@ -95,11 +92,15 @@ services:
       - elasticsearch
     depends_on:
       - elasticsearch
+    volumes:
+      - ./config/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
 
   # Logspout to collect container logs
   logspout:
     image: gliderlabs/logspout:${LOGSPOUT_VER}
     restart: always
+    expose:
+      - "5000/udp"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     command: syslog://logstash:5000
@@ -110,22 +111,24 @@ services:
 
   # Logstash log ingestion
   logstash:
-    image: logstash:${LOGSTASH_VER}
+    image: docker.elastic.co/logstash/logstash:${ELASTIC_VER}
     restart: always
-    command: logstash -f /etc/logstash/conf.d --config.reload.automatic
+    command: logstash -f /usr/share/logstash/pipeline --config.reload.automatic
     volumes:
-      - ./config/logstash/conf:/etc/logstash/conf.d:ro
-      - ./config/logstash/patterns:/etc/logstash/patterns:ro
-      - ./config/logstash/jvm.options:/etc/logstash/jvm.options:ro
-      - ./config/logstash/logstash.yml:/etc/logstash/logstash.yml:ro
+      - ./config/logstash/config:/usr/share/logstash/config:ro
+      - ./config/logstash/patterns:/usr/share/logstash/patterns:ro
+      - ./config/logstash/pipeline:/usr/share/logstash/pipeline:ro
     links:
       - elasticsearch
       - rabbit
+    depends_on:
+      - elasticsearch
+      - rabbit
 
-  # MongoDB storage backend
-  mongo:
-    image: mongo:${MONGODB_VER}
-    restart: always
+  # # MongoDB storage backend
+  # mongo:
+  #   image: mongo:${MONGODB_VER}
+  #   restart: always
 
   # Nginx web server
   nginx:
@@ -138,6 +141,8 @@ services:
       - cyphon
     links:
       - cyphon
+      - kibana
+      - rabbit
     depends_on:
       - cyphon
 
@@ -156,17 +161,51 @@ services:
       - ./config/env/cyphon.env
 
   # RabbitMQ queue consumer for Cyphon
-  receiver:
+  logchutes:
     extends:
       file: common-services.yml
       service: cyphon-prod
     restart: always
-    command: ../entrypoints/run_receiver.sh
+    command: ../entrypoints/run_receiver.sh logchutes
     volumes_from:
       - geoip
     links:
       - elasticsearch
-      - mongo
+      # - mongo
+      - postgres
+      - rabbit
+    depends_on:
+      - cyphon
+      - rabbit
+
+  monitors:
+    extends:
+      file: common-services.yml
+      service: cyphon-prod
+    restart: always
+    command: ../entrypoints/run_receiver.sh monitors
+    volumes_from:
+      - geoip
+    links:
+      - elasticsearch
+      # - mongo
+      - postgres
+      - rabbit
+    depends_on:
+      - cyphon
+      - rabbit
+
+  watchdogs:
+    extends:
+      file: common-services.yml
+      service: cyphon-prod
+    restart: always
+    command: ../entrypoints/run_receiver.sh watchdogs
+    volumes_from:
+      - geoip
+    links:
+      - elasticsearch
+      # - mongo
       - postgres
       - rabbit
     depends_on:

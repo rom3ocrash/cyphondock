@@ -15,19 +15,15 @@ SECRET_KEY = 'this-should-be-a-string-of-random-characters'
 
 HOST_SETTINGS = {
     'ALLOWED_HOSTS': [
-        # 'cyphon.example.com',
         'localhost',
         'cyphon',
     ],
     'CORS_ORIGIN_WHITELIST': [
-        # 'cyclops.example.com',
         'localhost:8000',
-        'cyclops:3000',
         'cyphon:8000',
         'nginx:80',
     ],
 }
-
 
 TEST = 'test' in sys.argv
 
@@ -60,6 +56,23 @@ CODEBOOKS = {
     'CODENAME_SUFFIX': '**',  # suffix for displayed CodeNames
 }
 
+CYCLOPS = {
+    'ENABLED': True,
+    'VERSION': '0.4.0',
+    'CDN_FORMAT': 'https://cdn.rawgit.com/dunbarcyber/cyclops/{0}/dist/cyclops.{1}',
+    'MAPBOX_ACCESS_TOKEN': '',
+    'LOCAL_ASSETS_ENABLED': False,
+    'LOCAL_ASSETS_PATH': os.path.abspath(os.path.join(PROJ_DIR, '../../cyclops/dist')),
+    'LOCAL_FOLDER_NAME': 'cyclops',
+    'LOCAL_CSS_FILENAME': 'cyclops.css',
+    'LOCAL_JS_FILENAME': 'cyclops.js',
+}
+
+DATASIFTER = {
+    'DEFAULT_MUNGER': 'default',
+    'DEFAULT_MUNGER_ENABLED': True,
+}
+
 DISTILLERIES = {
 
     # dictionary key for recording the date record was saved
@@ -74,7 +87,7 @@ DISTILLERIES = {
     'RAW_DATA_KEY': '_raw_data',
 
     # dictionary key for adding a label to a document
-    'LABEL_KEY':  '_metadata',
+    'LABEL_KEY': '_metadata',
 
     # dictionary key for saving the name of the backend where the raw data is stored
     'BACKEND_KEY': 'backend',
@@ -142,13 +155,13 @@ JIRA = {
 }
 
 LOGSIFTER = {
-    'DEFAULT_LOG_MUNGER': 'default_log',
-    'DEFAULT_LOG_CHUTE_ENABLED': True,
+    'DEFAULT_MUNGER': 'default',
+    'DEFAULT_MUNGER_ENABLED': True,
 }
 
 MAILSIFTER = {
-    'DEFAULT_MAIL_MUNGER': 'default_mail',
-    'DEFAULT_MAIL_CHUTE_ENABLED': True,
+    'DEFAULT_MUNGER': 'default',
+    'DEFAULT_MUNGER_ENABLED': True,
     'MAIL_COLLECTION': 'postgresql.django_cyphon.django_mailbox_message',
     'EMAIL_CONTENT_PREFERENCES': ('text/plain', 'text/html'),
     'ALLOWED_EMAIL_ATTACHMENTS': ('text/plain', 'application/pdf', 'image/jpeg', 'image/png'),
@@ -164,11 +177,12 @@ MONGODB = {
 
 NOTIFICATIONS = {
     'PUSH_NOTIFICATION_KEY': '',
+    'GCM_SENDER_ID': '',
     'IGNORED_ALERT_LEVELS': ['INFO'],
 }
 
 POSTGRES = {
-    'NAME': os.getenv('POSTGRES_DB', 'postgres'),
+    'NAME': os.getenv('POSTGRES_DB', 'cyphon'),
     'USER': os.getenv('POSTGRES_USER', 'postgres'),
     'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'postgres'),
     'HOST': os.getenv('POSTGRES_HOST', 'postgres'),  # e.g., 'localhost'
@@ -182,15 +196,13 @@ PRIVATE_FIELDS = [
 ]
 
 RABBITMQ = {
-    'EXCHANGE': 'cyphon',
-    'EXCHANGE_TYPE': 'direct',
-    'ROUTING_KEY': 'logstash',
-    'QUEUE_NAME': 'logstash',
-    'DURABLE': True,
     'HOST': os.getenv('RABBITMQ_DEFAULT_HOST', 'rabbit'),
     'VHOST': os.getenv('RABBITMQ_DEFAULT_VHOST', 'cyphon'),
     'USERNAME': os.getenv('RABBITMQ_DEFAULT_USER', 'guest'),
     'PASSWORD': os.getenv('RABBITMQ_DEFAULT_PASS', 'guest'),
+    'EXCHANGE': 'cyphon',
+    'EXCHANGE_TYPE': 'direct',
+    'DURABLE': True,
 }
 
 SAUCELABS = {
