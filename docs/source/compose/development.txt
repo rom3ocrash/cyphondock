@@ -1,0 +1,60 @@
+.. _development:
+
+#######################
+Development Environment
+#######################
+
+Unlike the production environment, the dev environment builds the images 
+for Cyphon using local files. You'll need to download the Cyphon GitHub
+repository into the ``/opt/cyphon/cyphon`` directory so these files are
+available to Docker Compose::
+
+    $ git clone https://github.com/dunbarcyber/cyphon.git /opt/cyphon/cyphon
+
+Settings for the dev environment are contained in the 
+``docker-compose.dev.yml`` file. To use the dev environment, you must 
+specify both the base configuration file and the dev configuration file 
+when starting the containers::
+
+    $ cd /opt/cyphon/cyphondock
+    $ sudo docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+Use the ``-d`` flag if you want to start the containers in the 
+background.
+
+
+*********
+Superuser
+*********
+
+The dev environment will create a Cyphon superuser using the ``CYPHON_USERNAME`` and ``CYPHON_PASSWORD`` settings defined in your `.config/env/cyphon.env <https://github.com/dunbarcyber/cyphondock/blob/master/config-COPYME/env/cyphon.env#L1-L2>`__ file, if that user does not already exist.
+
+
+*****
+Ports
+*****
+
+The dev environment maps the exposed ports in the containers to random 
+free ports on the host. This prevents any problems with ports already 
+in use on the host. Once the docker containers are running, you can 
+list the containers to see which ports on the host are being used for 
+the various services::
+
+    $ sudo docker ps -a
+
+For example, the Kibana container exposes port 5601, but that port will 
+be mapped to a random port on the host machine. If the port mapping for 
+the Kibana container is ``0.0.0.0:32775->5601/tcp``, you would visit 
+``http://localhost:32775`` in your web browser to access Kibana.
+
+
+************
+Data Volumes
+************
+
+Unlike the production environment, the dev environment does not assign 
+any specific host directories to store data from PostgreSQL, 
+Elasticsearch, or MongoDB. Instead, it allows those services to 
+automatically configure the locations for their data volumes. This 
+prevents any confusion of dev and production data if the production 
+environment is used at a later time. See Docker's `documentation <https://docs.docker.com/engine/tutorials/dockervolumes/>`_ to learn more about data volumes.

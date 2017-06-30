@@ -88,7 +88,7 @@ todo_include_todos = True
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -101,11 +101,15 @@ html_theme = 'alabaster'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+# The name of an image file (within the static path) to use as favicon of the
+# docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
+# pixels large.
+html_favicon = '_static/images/favicon.ico'
 
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Cyphondockdoc'
+htmlhelp_basename = 'Cyphondock-doc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -159,7 +163,33 @@ texinfo_documents = [
 ]
 
 
+# Example configuration for intersphinx: refer to the Python standard library.
+intersphinx_mapping = {'https://docs.python.org/': None}
 
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+intersphinx_mapping = {
+    'django': ('https://docs.djangoproject.com/en/1.10/',
+               'https://docs.djangoproject.com/en/1.10/_objects/'),
+    'elasticsearch': ('https://elasticsearch-py.readthedocs.io/en/5.0.1/',
+                      None),
+    'mongodb': ('http://api.mongodb.com/python/current/', None),
+    'psycopg2': ('http://initd.org/psycopg/docs/', None),
+    'python': ('https://docs.python.org/3/', None),
+    'sphinx': ('http://www.sphinx-doc.org/en/stable/', None),
+}
+
+rst_epilog = """
+.. _Cyphon: https://github.com/dunbarcyber/cyphon
+.. _Elasticsearch: https://www.elastic.co/products/elasticsearch/
+.. _Django: https://www.djangoproject.com/
+.. _Docker: https://www.docker.com/
+.. _Filebeat: https://www.elastic.co/products/beats/filebeat/
+.. _Logstash: https://www.elastic.co/products/logstash/
+.. _MongoDB: https://www.mongodb.com/
+.. _PostgreSQL: https://www.postgresql.org/
+.. _RabbitMQ: https://www.rabbitmq.com/
+"""
+
+def setup(app):
+    app.add_javascript('js/cyphondock.js')

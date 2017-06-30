@@ -1,0 +1,64 @@
+.. _production:
+
+######################
+Production Environment
+######################
+
+The production environment uses a Cyphon image on Docker Hub as the
+basis for its Cyphon container.
+
+Settings for the production environment are contained in the 
+``docker-compose.override.yml`` file. Docker Compose automatically reads  
+both the ``docker-compose.yml`` and ``docker-compose.override.yml`` 
+files when it builds an environment, unless other files are specified. 
+So in this case, Docker will deploy the production environment by default.
+
+To start up the (default) production environment::
+
+    $ cd /opt/cyphon/cyphondock
+    $ sudo docker-compose up -d
+
+
+*********
+Superuser
+*********
+
+To create a superuser for the production environment, enter the shell of the Django container::
+
+    $ sudo docker exec -it cyphondock_cyphon_1 /bin/sh
+
+Then create the superuser::
+
+    $ python manage.py createsuperuser
+
+You can use this user to log in to Cyphon and create other user accounts.
+
+
+*****
+Ports
+*****
+
+The production environment will map the exposed ports in the containers 
+to same ports on the host machine. This makes it straightforward to use 
+the endpoints of the various services.
+
+You can access Cyphon and some of its related services through your web 
+browser. The following services can be accessed by visiting your host 
+domain on the appropriate port (e.g., ``http://example.com:5601``):
+
+===================  =====
+Service              Port
+===================  =====
+Cyphon               80
+Kibana               5601
+RabbitMQ management  15672
+===================  =====
+
+
+************
+Data Volumes
+************
+
+The production environment uses the subdirectories in ``/opt/cyphon/data``
+as data volumes for PostgreSQL, Elasticsearch, or MongoDB. This makes
+the data from those services easy to locate and backup.
