@@ -31,12 +31,14 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc',
+extensions = [
+    'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
-    'sphinx.ext.githubpages']
+    'sphinx.ext.githubpages',
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -176,7 +178,7 @@ intersphinx_mapping = {
     'mongodb': ('http://api.mongodb.com/python/current/', None),
     'psycopg2': ('http://initd.org/psycopg/docs/', None),
     'python': ('https://docs.python.org/3/', None),
-    'sphinx': ('http://www.sphinx-doc.org/en/stable/', None),
+    # 'sphinx': ('http://www.sphinx-doc.org/en/stable/', None),
 }
 
 rst_epilog = """
@@ -187,8 +189,14 @@ rst_epilog = """
 .. _Filebeat: https://www.elastic.co/products/beats/filebeat/
 .. _Logstash: https://www.elastic.co/products/logstash/
 .. _MongoDB: https://www.mongodb.com/
+.. _Nginx: https://www.nginx.com/resources/wiki/
 .. _PostgreSQL: https://www.postgresql.org/
 .. _RabbitMQ: https://www.rabbitmq.com/
+.. _docker-compose.yml: https://github.com/dunbarcyber/cyphondock/blob/master/docker-compose.yml
+.. _docker-compose.dev.yml: https://github.com/dunbarcyber/cyphondock/blob/master/docker-compose.dev.yml
+.. _docker-compose.override.yml: https://github.com/dunbarcyber/cyphondock/blob/master/docker-compose.override.yml
+.. _docker-compose.travis.yml: https://github.com/dunbarcyber/cyphondock/blob/master/docker-compose.travis.yml
+.. _docker-compose.backends.yml: https://github.com/dunbarcyber/cyphondock/blob/master/docker-compose.backends.yml
 """
 
 def setup(app):

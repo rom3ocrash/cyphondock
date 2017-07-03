@@ -11,11 +11,11 @@ Cyphondock is a collection of `Docker Compose <https://docs.docker.com/compose/>
 
 Cyphondock allows you to easily deploy a stack of Docker containers for running Cyphon and its related services, including:
 
-    - PostgreSQL
-    - RabbitMQ
-    - Nginx
-    - Logstash
-    - Elasticsearch
+    - `PostgreSQL`_
+    - `RabbitMQ`_
+    - `Nginx`_
+    - `Logstash`_
+    - `Elasticsearch`_
 
 It also contains example configurations for these services to help you get up and running quickly.
 
@@ -25,8 +25,8 @@ It also contains example configurations for these services to help you get up an
    :caption: Contents:
 
    configure-server
-   securing-cyphon
    configure-project
+   securing-cyphon
    compose/compose
 
 ******************

@@ -18,19 +18,20 @@ File name                       Documentation
 You can read more about Docker Compose files in Docker's 
 `official documentation <https://docs.docker.com/compose/compose-file/>`_.
 
+*******
+Version
+*******
+
+version: '2'
+
+
 .. toctree::
    :maxdepth: 1
    :caption: Contents:
 
-   cyphon-containers
+   cyphon-images
    base
    development
    production
    testing
    backends
-
-.. _docker-compose.yml: https://github.com/dunbarcyber/cyphondock/blob/master/docker-compose.yml
-.. _docker-compose.dev.yml: https://github.com/dunbarcyber/cyphondock/blob/master/docker-compose.dev.yml
-.. _docker-compose.override.yml: https://github.com/dunbarcyber/cyphondock/blob/master/docker-compose.override.yml
-.. _docker-compose.travis.yml: https://github.com/dunbarcyber/cyphondock/blob/master/docker-compose.travis.yml
-.. _docker-compose.backends.yml: https://github.com/dunbarcyber/cyphondock/blob/master/docker-compose.backends.yml

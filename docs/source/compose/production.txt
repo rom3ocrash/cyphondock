@@ -8,8 +8,8 @@ The production environment uses a Cyphon image on Docker Hub as the
 basis for its Cyphon container.
 
 Settings for the production environment are contained in the 
-``docker-compose.override.yml`` file. Docker Compose automatically reads  
-both the ``docker-compose.yml`` and ``docker-compose.override.yml`` 
+`docker-compose.override.yml`_ file. Docker Compose automatically reads  
+both the `docker-compose.yml`_ and `docker-compose.override.yml`_ 
 files when it builds an environment, unless other files are specified. 
 So in this case, Docker will deploy the production environment by default.
 
