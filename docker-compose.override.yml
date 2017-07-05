@@ -1,10 +1,10 @@
-# Production overrides that will: 
-# 
+# Production overrides that will:
+#
 #   - map container ports to the same ports on the host machine
 #   - map container volumes to volumes on the host machine
-# 
+#
 
-version: '2'
+version: '2.1'
 
 services:
 

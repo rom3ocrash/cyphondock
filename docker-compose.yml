@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 
 services:
 
@@ -53,6 +53,11 @@ services:
       - postgres
     depends_on:
       - postgres
+    healthcheck:
+      test: ["CMD", "wget", "-O", "-", "http://localhost:8000/app/"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
 
   # Elasticsearch storage backend
   elasticsearch:
@@ -144,7 +149,8 @@ services:
       - kibana
       - rabbit
     depends_on:
-      - cyphon
+      cyphon:
+        condition: service_healthy
 
   # PostgreSQL PostGIS database for Cyphon
   postgres:
