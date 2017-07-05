@@ -1,6 +1,6 @@
 # Creates a stack for testing on Travis-CI.
 
-version: '2'
+version: '2.1'
 
 services:
 
