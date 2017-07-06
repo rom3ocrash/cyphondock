@@ -25,6 +25,7 @@ services:
       - ../cyphon/entrypoints:/usr/src/app/entrypoints
       - ./config/cyphon/custom:/usr/src/app/cyphon/custom
       - ./config/cyphon/settings:/usr/src/app/cyphon/cyphon/settings
+      - ./config/cyphon/fixtures:/usr/src/app/cyphon/fixtures
 
   cyphon-prod:
     image: dunbar/cyphon:${CYPHON_VER}
@@ -39,6 +40,7 @@ services:
       - ../keys:/usr/src/app/keys
       - ./config/cyphon/custom:/usr/src/app/cyphon/custom
       - ./config/cyphon/settings:/usr/src/app/cyphon/cyphon/settings
+      - ./config/cyphon/fixtures:/usr/src/app/cyphon/fixtures
 
   cyphon-test:
     image: dunbar/cyphon:${CYPHON_VER}

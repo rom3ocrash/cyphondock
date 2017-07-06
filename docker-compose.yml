@@ -43,8 +43,6 @@ services:
     extends:
       file: common-services.yml
       service: cyphon-prod
-    volumes:
-      - ./config/cyphon/fixtures:/usr/src/app/cyphon/fixtures:ro
     volumes_from:
       - geoip
     links:
