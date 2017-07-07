@@ -18,12 +18,6 @@ File name                       Documentation
 You can read more about Docker Compose files in Docker's 
 `official documentation <https://docs.docker.com/compose/compose-file/>`_.
 
-*******
-Version
-*******
-
-version: '2'
-
 
 .. toctree::
    :maxdepth: 1

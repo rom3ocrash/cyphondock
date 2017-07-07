@@ -1,0 +1,5 @@
+.. _nginx-configs:
+
+####################
+Nginx Configurations
+####################

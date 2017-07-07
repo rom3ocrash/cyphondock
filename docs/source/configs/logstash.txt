@@ -1,0 +1,62 @@
+.. _logstash-configs:
+
+#######################
+Logstash Configurations
+#######################
+
+
+.. _logstash-configuration:
+
+******
+config
+******
+
+https://www.elastic.co/guide/en/logstash/current/config-setting-files.html#_settings_files
+
+.. _logstash.yml:
+
+logstash.yml
+============
+
+This file contains Logstash configuration flags. See Logstash's `documentation <https://www.elastic.co/guide/en/logstash/current/logstash-settings-file.html>`__ for more info.
+
+If you don't have `X-Pack <https://www.elastic.co/guide/en/x-pack/index.html>`__, be sure to include the setting ``xpack.monitoring.enabled: false: false``. See Elastic's `documentation <https://www.elastic.co/guide/en/x-pack/5.5/installing-xpack.html#xpack-enabling>`__ for more info.
+
+
+.. _logstash-jvm.options:
+
+
+jvm.options
+===========
+
+This file contains JVM configuration flags and can be used to set JVM heap size.
+
+
+.. _logstash-log4j2.properties:
+
+log4j2.properties
+=================        
+
+This file is used to configure Logstash logging. See Elasticsearch's `documentation <https://www.elastic.co/guide/en/logstash/current/logging.html#_log4j_2_configuration>`__ for more info.
+
+
+.. _logstash-patterns:
+
+********
+patterns
+********
+
+- ./config/logstash/patterns:/usr/share/logstash/patterns:ro
+
+https://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html
+
+
+.. _logstash-pipeline:
+
+********
+pipeline
+********
+
+- ./config/logstash/pipeline:/usr/share/logstash/pipeline:ro
+
+https://www.elastic.co/guide/en/logstash/current/pipeline.html

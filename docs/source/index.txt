@@ -17,8 +17,9 @@ Cyphondock allows you to easily deploy a stack of Docker containers for running 
     - `Logstash`_
     - `Elasticsearch`_
 
-It also contains example configurations for these services to help you get up and running quickly.
+It also contains example configurations for these services.
 
+These files are here to help you get up and running quickly with Cyphon, but you should feel free to modify the Docker Compose files and configuration files to suit your particular needs.
 
 .. toctree::
    :maxdepth: 1
@@ -28,11 +29,4 @@ It also contains example configurations for these services to help you get up an
    configure-project
    securing-cyphon
    compose/compose
-
-******************
-Indices and tables
-******************
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   configs/configs

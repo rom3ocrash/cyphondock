@@ -117,9 +117,7 @@ which is explained in `Cyphon's documentation <http://cyphon.readthedocs.io/en/l
 Nginx
 =====
 
-Settings for the `Nginx <https://www.nginx.com/>`_ web server are in the
-``./config/nginx/nginx.conf`` file. You can use the default settings if 
-you like.
+Settings for the `Nginx`_ web server are in the ``./config/nginx/nginx.conf`` file. You can use the default settings if you like.
 
 
 .. _logstash-config:
