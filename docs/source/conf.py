@@ -187,6 +187,7 @@ rst_epilog = """
 .. _Django: https://www.djangoproject.com/
 .. _Docker: https://www.docker.com/
 .. _Filebeat: https://www.elastic.co/products/beats/filebeat/
+.. _Kibana: https://www.elastic.co/products/kibana/
 .. _Logstash: https://www.elastic.co/products/logstash/
 .. _MongoDB: https://www.mongodb.com/
 .. _Nginx: https://www.nginx.com/resources/wiki/
