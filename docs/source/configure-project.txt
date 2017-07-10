@@ -74,9 +74,8 @@ You can generate one `here <http://www.miniwebtool.com/django-secret-key-generat
 
 The ``base.py``, ``dev.py``, and ``prod.py`` files contain more general 
 settings for Django and other third party apps used by Cyphon. At a 
-minimum, you should configure the `BASE_URL` setting in the ``dev.py`` 
-and ``prod.py`` files. You can read more about Django's settings in  
-`Django's documentation <https://docs.djangoproject.com/en/1.10/topics/settings/>`__.
+minimum, you should configure the ``BASE_URL`` setting in the ``dev.py`` 
+and ``prod.py`` files. See :ref:`cyphon-configs` for more info. 
 
 
 .. _cyclops-config:
@@ -117,7 +116,7 @@ which is explained in `Cyphon's documentation <http://cyphon.readthedocs.io/en/l
 Nginx
 =====
 
-Settings for the `Nginx`_ web server are in the ``./config/nginx/nginx.conf`` file. You can use the default settings if you like.
+Settings for the `Nginx`_ web server are in the ``./config/nginx/nginx.conf`` file. You can use the default settings if you like. See :ref:`nginx-configs` for more info. 
 
 
 .. _logstash-config:
@@ -127,7 +126,7 @@ Logstash
 
 Cyphon receives data from logs using `Logstash`_ and `RabbitMQ`_. Logstash receives the logs and passes them to RabbitMQ, where Cyphon consumes them.
 
-To configure Logstash, you can use the example configuration files in ``./config/logstash``. See `Logstash's documentation <https://www.elastic.co/guide/en/logstash/current/config-setting-files.html>`__ for more information on these files. The Docker Compose files are already configured to create a Logstash container based on these configs.
+To configure Logstash, you can use the example configuration files in ``./config/logstash``. See :ref:`logstash-configs` for more info. The Docker Compose files are already configured to create a Logstash container based on these configs.
 
 .. warning:: If you changed the RabbitMQ settings in the ``cyphon.env`` 
              file, you will need to make sure your ``logstash.conf`` 
@@ -139,4 +138,4 @@ To configure Logstash, you can use the example configuration files in ``./config
 Elasticsearch
 =============
 
-Settings for the `Elasticsearch`_ search engine are in the ``./config/elasticsearch/`` folder. You can use the default settings if you like.
+Settings for the `Elasticsearch`_ search engine are in the ``./config/elasticsearch/`` folder. You can use the default settings if you like. See :ref:`elasticsearch-configs` for more info. 
