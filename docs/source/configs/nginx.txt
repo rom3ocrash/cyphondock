@@ -1,0 +1,13 @@
+.. _nginx-configs:
+
+####################
+Nginx Configurations
+####################
+
+.. _nginx.conf:
+
+**********
+nginx.conf
+**********
+
+The `nginx.conf <https://github.com/dunbarcyber/cyphondock/blob/master/config-COPYME/nginx/nginx.conf>`__ file configures the Nginx web server for accessing Cyphon. See Nginx's `documentation <http://nginx.org/en/docs/beginners_guide.html>`__ for details.

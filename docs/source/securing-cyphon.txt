@@ -1,0 +1,76 @@
+.. _securing-cyphon:
+
+###############
+Securing Cyphon
+###############
+
+.. _disclaimer:
+
+**********
+Disclaimer
+**********
+
+The Cyphon project is provided as open-source software, and we encourage you to report any security bugs, configuration issues, or comments related to Cyphon, Cyclops, or Cyphondock. We’re extremely thankful for responsible security researchers that report vulnerabilities to us. To make a report, please `email us <CyphonProject@dunbarsecured.com>`__ with the full details, including steps to reproduce the issue. 
+
+We recommend that you follow security best practices when running Cyphon. Please consult the official documentation of any open source or commercially available products that are used as a component of (or are integrated with) Cyphon, and follow their recommended security practices. This disclaimer also applies to outside APIs, operating systems, or virtualization technologies.
+
+
+.. _credentials:
+
+***********
+Credentials
+***********
+
+.. _cyphon-env:
+
+Cyphon environment file
+=======================
+
+The ``cyphondock/config/env/cyphon.env`` file contains default usernames and passwords for:
+
+  - Cyphon
+  - PostgreSQL
+  - RabbitMQ
+
+Please change these values to secure your instance.
+
+.. _cyphon-conf:
+
+Cyphon configuration file
+=========================
+
+The ``cyphondock/config/cyphon/settings/conf.py`` file contains default usernames and passwords for:
+
+  - PostgreSQL
+  - RabbitMQ
+
+If you're not setting these values through environment variables in the :ref:`cyphon-env`, you should change the default values in ``conf.py``.
+
+You should also change the Django ``SECRET_KEY`` to something unique. See the instructions on :ref:`configuring Django<django-config>` for details.
+
+RSA keys
+========
+
+The ``KEYS_DIR`` setting in the :ref:`cyphon-conf` specifies the directory in which Django stores RSA keys associated with `Passports <http://cyphon.readthedocs.io/en/latest/modules/ambassador.passports.html>`__. Public access to this directory should be denied. Check your ``cyphondock/config/nginx/nginx.conf`` file to confirm this.
+
+
+.. _ports:
+
+*****
+Ports
+*****
+
+Cyphondock's Docker Compose files for the :ref:`production environment <production>` open the following ports on the host machine:
+
+========  =================================
+Port      Service
+========  =================================
+80        Cyphon - Nginx proxy
+443       Cyphon - Nginx proxy
+5000      Logstash
+5044      Logstash
+5601      Kibana - Nginx proxy
+15672     RabbitMQ management - Nginx proxy
+========  =================================
+
+Please restrict external access to these ports.
