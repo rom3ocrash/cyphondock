@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/dunbarcyber/cyphondock.svg?branch=master)](https://travis-ci.org/dunbarcyber/cyphondock)
+[![Build Status](https://travis-ci.org/dunbarcyber/cyphondock.svg?branch=master)](https://travis-ci.org/dunbarcyber/cyphondock) [![Documentation Status](https://readthedocs.org/projects/cyphondock/badge/?version=latest)](http://cyphondock.readthedocs.io/en/latest/?badge=latest)
 
 [![Cyphon](https://github.com/dunbarcyber/cyphondock/blob/master/docs/source/_static/images/cyphondock-logo.png)](https://cyphon.io)
 
