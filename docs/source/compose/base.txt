@@ -238,7 +238,7 @@ Shared Volume  :ref:`geoip-service`
 PostgreSQL
 **********
 
-This service creates a PostGIS database for saving Cyphon configurations and alerts. It is used as the database backend for `GeoDjango <https://docs.djangoproject.com/en/1.11/ref/contrib/gis/>`__. The host name, database name, username, and passowrd are determined by settings in the :ref:`cyphon.env`. 
+This service creates a PostGIS database for saving Cyphon configurations and alerts. It is used as the database backend for `GeoDjango <https://docs.djangoproject.com/en/1.11/ref/contrib/gis/>`__. The host name, database name, username, and passowrd are determined by settings in the :ref:`env-configs`. 
 
 =============  =========================================================
 Image          `mdillon/postgis <https://hub.docker.com/r/mdillon/postgis/>`__
@@ -261,7 +261,7 @@ Env File       :ref:`cyphon.env<cyphon-env>`
 RabbitMQ
 ********
 
-This service creates a RabbitMQ message broker for :ref:`logstash-service` and :ref:`cyphon-services`. Defaults for the host name, virtual host, username, and passowrd are determined by settings in the :ref:`cyphon.env`. 
+This service creates a RabbitMQ message broker for :ref:`logstash-service` and :ref:`cyphon-services`. Defaults for the host name, virtual host, username, and password are determined by settings in the :ref:`env-configs`. 
 
 =============  =========================================================
 Image          `rabbitmq <https://hub.docker.com/_/rabbitmq/>`__
@@ -346,7 +346,7 @@ Elasticsearch
 
 This service provides an Elasticsearch backend for Cyphon's `Warehouses <http://cyphon.readthedocs.io/en/latest/user-manual/data-storage.html#warehouses>`__. It's also used to store data from :ref:`logstash-service`.
 
-The host name and port are determined by settings in the :ref:`cyphon.env`. 
+The host name and port are determined by settings in the :ref:`env-configs`. 
 
 =============  =========================================================
 Image          `nginx <https://hub.docker.com/_/nginx/>`__
@@ -469,7 +469,7 @@ MongoDB
 
 This optional service provides a MongoDB backend for Cyphon's `Warehouses <http://cyphon.readthedocs.io/en/latest/user-manual/data-storage.html#warehouses>`__. It can also be used to store data from :ref:`logstash-service` when used with Logstash's `MongoDB output plugin <https://www.elastic.co/guide/en/logstash/current/plugins-outputs-mongodb.html>`__.
 
-The host name and port are determined by settings in the :ref:`cyphon.env`. 
+The host name and port are determined by settings in the :ref:`env-configs`. 
 
 =============  =========================================================
 Image          `mongo <https://hub.docker.com/_/mongo/>`__
