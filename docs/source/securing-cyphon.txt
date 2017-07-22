@@ -62,15 +62,39 @@ Ports
 
 Cyphondock's Docker Compose files for the :ref:`production environment <production>` open the following ports on the host machine:
 
-========  =================================
-Port      Service
-========  =================================
-80        Cyphon - Nginx proxy
-443       Cyphon - Nginx proxy
-5000      Logstash
-5044      Logstash
-5601      Kibana - Nginx proxy
-15672     RabbitMQ management - Nginx proxy
-========  =================================
+=====  ===========  ===================
+Port   Protocol     Service
+=====  ===========  ===================
+80     TCP (HTTP)   Cyphon - Nginx proxy
+443    TCP (HTTPS)  Cyphon - Nginx proxy
+5000   UDP          Logstash
+5044   TCP          Logstash
+5045   TCP          Logstash
+5601   TCP          Kibana - Nginx proxy
+15672  TCP          RabbitMQ management - Nginx proxy
+=====  ===========  ===================
 
 Please restrict external access to these ports.
+
+
+.. _ssl:
+
+*************************************
+Running Cyphon with SSL through Nginx
+*************************************
+
+You may wish to run Cyphon with SSL to secure connections. Cyphondock makes this easy by providing an alternate Nginx configuration file at ``cyphondock/config/nginx/nginx.conf.ssl`` that can be used to get started quickly. Placeholder files for SSL certificates and private keys are also provided. You can choose to use self-signed certificates or use certificates signed by a trusted certificate authority.
+
+Assuming you already have an SSL certificate and private key, copy their contents into the placeholder files provided::
+
+    $ cd /opt/cyphon/cyphondock/config/nginx
+    $ cp /path/to/your/certificate ssl.crt
+    $ cp /path/to/your/private/key ssl.key
+
+Then, copy the provided ``nginx.conf.ssl`` to be the main Nginx configuration file::
+
+    $ cp nginx.conf.ssl nginx.conf
+
+Finally, restart the Nginx Docker container or the entire Docker-Compose::
+
+    $ docker-compose restart
