@@ -11,7 +11,7 @@ Project Setup
 Installation
 ************
 
-To install your Cyphon project, clone the Cyphondock Git repository. For this example, we'll copy it into the ``/opt/cyphon`` directory::
+To install your Cyphon project, first download the Cyphondock Git repository. For this example, we'll clone it into the ``/opt/cyphon`` directory::
 
     $ git clone https://github.com/dunbarcyber/cyphondock.git /opt/cyphon/cyphondock
 
