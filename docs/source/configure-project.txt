@@ -11,7 +11,7 @@ Project Setup
 Installation
 ************
 
-To install your Cyphon project, create a directory structure according to the instructions in `Cyphon's documentation <http://cyphon.readthedocs.io/en/latest/getting-started/install-cyphon.html>`__. Then, clone the Cyphondock Git repository::
+To install your Cyphon project, clone the Cyphondock Git repository. For this example, we'll copy it into the ``/opt/cyphon`` directory::
 
     $ git clone https://github.com/dunbarcyber/cyphondock.git /opt/cyphon/cyphondock
 
