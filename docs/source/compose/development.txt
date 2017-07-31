@@ -4,10 +4,7 @@
 Development Environment
 #######################
 
-Unlike the :ref:`production environment<production>`, the dev environment builds the images 
-for Cyphon using local files. You'll need to download the Cyphon GitHub
-repository into the ``/opt/cyphon/cyphon`` directory so these files are
-available to Docker Compose::
+Unlike the :ref:`production environment<production>`, the dev environment builds the images for Cyphon using local files. You'll need to download the Cyphon GitHub repository into the ``/opt/cyphon/cyphon`` directory so these files are available to Docker Compose::
 
     $ git clone https://github.com/dunbarcyber/cyphon.git /opt/cyphon/cyphon
 
