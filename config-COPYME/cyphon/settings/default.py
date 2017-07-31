@@ -130,7 +130,6 @@ ELASTICSEARCH = {
 
 EMAIL = {
     'DEFAULT_FROM': 'webmaster@localhost',
-    'NAME': 'Cyphon',
     'HOST': 'localhost',
     'HOST_USER': '',
     'HOST_PASSWORD': '',
@@ -440,7 +439,6 @@ PASSWORD_MIN_LENGTH = 6
 PASSWORD_MAX_LENGTH = 30
 
 # This section is for sending email to users. This example is a gmail account.
-EMAIL_NAME = EMAIL['NAME']
 EMAIL_HOST = EMAIL['HOST']
 EMAIL_HOST_USER = EMAIL['HOST_USER']
 EMAIL_HOST_PASSWORD = EMAIL['HOST_PASSWORD']
