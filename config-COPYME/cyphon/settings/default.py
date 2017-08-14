@@ -59,10 +59,6 @@ PROJ_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 HOME_DIR = os.path.dirname(PROJ_DIR)
 KEYS_DIR = os.path.join(HOME_DIR, 'keys')
 
-ALERTS = {
-    'ALERT_URL': '/#/alerts?alertDetail=',
-}
-
 APPUSERS = {
     'CUSTOM_FILTER_BACKENDS': []
 }
@@ -123,9 +119,21 @@ DISTILLERIES = {
 }
 
 ELASTICSEARCH = {
-    'HOSTS': ['{0}:{1}'.format(os.getenv('ELASTICSEARCH_HOST', 'localhost'),
-                               os.getenv('ELASTICSEARCH_PORT', '9200'))],
-    'TIMEOUT': 30,
+    'HOSTS': [
+        {
+            'host': os.getenv('ELASTICSEARCH_HOST', 'elasticsearch'),
+            'port': int(os.getenv('ELASTICSEARCH_PORT', '9200')),
+            'http_auth': os.getenv('ELASTICSEARCH_HTTP_AUTH'),
+            'use_ssl': bool(int(os.getenv('ELASTICSEARCH_USE_SSL', False))),
+        },
+    ],
+    # Note: the keyword arguments provided below are passed to the
+    # *Elasticsearch* constructor, and should not contain host-specific
+    # keyword arguments for individual connections, which are instead
+    # configured in the 'HOSTS' list above.
+    'KWARGS': {
+        'timeout': 30,
+    },
 }
 
 EMAIL = {
@@ -390,6 +398,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'cyphon.version.VersionMiddleware',
 )
 
 ROOT_URLCONF = 'cyphon.urls'

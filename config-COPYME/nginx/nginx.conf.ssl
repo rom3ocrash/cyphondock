@@ -7,7 +7,6 @@ events {
 }
 
 
-
 http {
 
     server {
@@ -47,6 +46,10 @@ http {
         location /keys/ {
            deny all;
            return 404;
+        }
+
+        location /media/ {
+            alias /usr/src/app/media/;
         }
 
         location /static/ {
