@@ -1,8 +1,4 @@
 """
-[`source`_]
-
-
-.. _source: ../_modules/cyphon/settings/conf.html
 
 """
 
@@ -10,20 +6,24 @@
 import os
 import sys
 
+# third party
+from ec2_metadata import ec2_metadata
+
+# local
+from utils.settings import ON_EC2
+
 
 SECRET_KEY = 'this-should-be-a-string-of-random-characters'
 
 HOST_SETTINGS = {
-    'ALLOWED_HOSTS': [
-        'localhost',
-        'cyphon',
-    ],
-    'CORS_ORIGIN_WHITELIST': [
-        'localhost:8000',
-        'cyphon:8000',
-        'nginx:80',
-    ],
+    'ALLOWED_HOSTS': [addr.strip() for addr in os.getenv(
+        'ALLOWED_HOSTS', 'localhost').split(',')],
+    'CORS_ORIGIN_WHITELIST': [addr.strip() for addr in os.getenv(
+        'CORS_ORIGIN_WHITELIST', 'localhost:8000').split(',')],
 }
+
+if ON_EC2:
+    HOST_SETTINGS['ALLOWED_HOSTS'].append(ec2_metadata.private_ipv4)
 
 TEST = 'test' in sys.argv
 
@@ -43,10 +43,6 @@ PROJ_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 HOME_DIR = os.path.dirname(PROJ_DIR)
 KEYS_DIR = os.path.join(HOME_DIR, 'keys')
 
-ALERTS = {
-    'ALERT_URL': '/#/alerts?alertDetail=',
-}
-
 APPUSERS = {
     'CUSTOM_FILTER_BACKENDS': []
 }
@@ -58,8 +54,6 @@ CODEBOOKS = {
 
 CYCLOPS = {
     'ENABLED': True,
-    'VERSION': '0.4.0',
-    'CDN_FORMAT': 'https://cdn.rawgit.com/dunbarcyber/cyclops/{0}/dist/cyclops.{1}',
     'MAPBOX_ACCESS_TOKEN': '',
     'LOCAL_ASSETS_ENABLED': False,
     'LOCAL_ASSETS_PATH': os.path.abspath(os.path.join(PROJ_DIR, '../../cyclops/dist')),
@@ -107,17 +101,30 @@ DISTILLERIES = {
 }
 
 ELASTICSEARCH = {
-    'HOSTS': ['{0}:{1}'.format(os.getenv('ELASTICSEARCH_HOST', 'elasticsearch'),
-                               os.getenv('ELASTICSEARCH_PORT', '9200'))],
-    'TIMEOUT': 30,
+    'HOSTS': [
+        {
+            'host': os.getenv('ELASTICSEARCH_HOST', 'elasticsearch'),
+            'port': int(os.getenv('ELASTICSEARCH_PORT', '9200')),
+            'http_auth': os.getenv('ELASTICSEARCH_HTTP_AUTH'),
+            'use_ssl': bool(int(os.getenv('ELASTICSEARCH_USE_SSL', False))),
+        },
+    ],
+    # Note: the keyword arguments provided below are passed to the
+    # *Elasticsearch* constructor, and should not contain host-specific
+    # keyword arguments for individual connections, which are instead
+    # configured in the 'HOSTS' list above.
+    'KWARGS': {
+        'timeout': 30,
+    },
 }
 
 EMAIL = {
-    'NAME': 'Cyphon',
-    'HOST': 'smtp.gmail.com',
-    'HOST_USER': 'user@',
-    'HOST_PASSWORD': 'you',
+    'DEFAULT_FROM': 'webmaster@localhost',
+    'HOST': 'localhost',
+    'HOST_USER': '',
+    'HOST_PASSWORD': '',
     'PORT': 587,
+    'SUBJECT_PREFIX': '[Cyphon] ',
     'USE_TLS': True,
 }
 
