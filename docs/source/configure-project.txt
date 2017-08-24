@@ -90,7 +90,6 @@ Make sure to take a quick look over it before using Cyclops in your use case.
 
 Cyclops is configured with the ``conf.py`` file in the Cyphon settings::
 
-
     CYCLOPS = {
         'ENABLED': True,
         'MAPBOX_ACCESS_TOKEN': '',
