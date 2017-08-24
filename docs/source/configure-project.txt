@@ -90,13 +90,12 @@ Make sure to take a quick look over it before using Cyclops in your use case.
 
 Cyclops is configured with the ``conf.py`` file in the Cyphon settings::
 
+
     CYCLOPS = {
         'ENABLED': True,
-        'VERSION': '0.4.1',
-        'CDN_FORMAT': 'https://cdn.rawgit.com/dunbarcyber/cyclops/{0}/dist/cyclops.{1}',
         'MAPBOX_ACCESS_TOKEN': '',
         'LOCAL_ASSETS_ENABLED': False,
-        'LOCAL_ASSETS_PATH': os.path.abspath(os.path.join(PROJ_DIR, '../../cyclops/build')),
+        'LOCAL_ASSETS_PATH': os.path.abspath(os.path.join(PROJ_DIR, '../../cyclops/dist')),
         'LOCAL_FOLDER_NAME': 'cyclops',
         'LOCAL_CSS_FILENAME': 'cyclops.css',
         'LOCAL_JS_FILENAME': 'cyclops.js',
