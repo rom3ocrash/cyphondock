@@ -2339,7 +2339,6 @@
       ["destination_ip"],
       ["destination_port"],
       ["dst_geoip"],
-      ["generator_id"],
       ["host"],
       ["priority"],
       ["protocol"],
