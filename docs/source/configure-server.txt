@@ -10,6 +10,7 @@ To deploy Cyphon using Cyphondock, you'll need to install `Docker`_ and Docker C
     * :ref:`install-docker-engine`
     * :ref:`install-docker-compose`
     * :ref:`configure-virtual-memory`
+    * :ref:`bash-install`
 
 
 .. _system-requirements:
@@ -67,9 +68,8 @@ To install Docker Community Edition x86_64::
 
     $ sudo apt-get update
     $ sudo apt-get install docker-ce
-    $ sudo apt-get install docker-engine
 
-See Docker's `Ubuntu documentation <https://docs.docker.com/engine/installation/linux/ubuntu/>`__ for more information on this installation procedure. 
+See Docker's `Ubuntu documentation <https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/>`__ for more information on this installation procedure. 
 You can also refer to Digital Ocean's `tutorial for Ubuntu 16.04 <https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04>`__.
 
 
@@ -106,3 +106,81 @@ To increase the memory map count::
 Make this setting permanent by editing ``/etc/sysctl.conf``::
 
     $ echo "vm.max_map_count = 262144" | sudo tee -a /etc/sysctl.conf
+
+
+.. _bash-install:
+
+***********************************
+Bash Script to Auto Install on Host
+***********************************
+
+You can use the following bash script to auto install the project on an Ubuntu 16.04 server. To install on other operating systems, please modify it accordingly.
+
+.. code::
+
+    #!/bin/bash
+
+    # Uninstall older version of Docker if present
+    sudo apt-get remove docker docker-engine
+    
+    # Update the apt package index
+    sudo apt-get update
+
+    # Install packages to allow apt to use a repository over HTTPS
+    sudo apt-get -y install \
+        apt-transport-https \
+        ca-certificates \
+        curl \
+        software-properties-common
+
+    # Add Docker’s official GPG key
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    
+    # Set up the stable repository
+    sudo add-apt-repository \
+        "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+        $(lsb_release -cs) \
+        stable"
+
+    # Update the apt package index
+    sudo apt-get update
+
+    # Install the latest version of Docker Community Edition
+    sudo apt-get -y install docker-ce
+
+    # Install pip
+    sudo apt-get -y install python-pip
+    
+    # Install Docker Compose
+    sudo pip install docker-compose
+
+    # Increase the memory map count for Elasticsearch
+    sudo sysctl -w vm.max_map_count=262144
+
+    # Make this setting permanent by editing /etc/sysctl.conf
+    echo "vm.max_map_count = 262144" | sudo tee -a /etc/sysctl.conf
+
+    # Download the Cyphondock Git repository into the /opt/cyphon directory
+    sudo git clone https://github.com/dunbarcyber/cyphondock.git /opt/cyphon/cyphondock
+
+    # Copy generic settings to the `config` directory for this project instance
+    cd /opt/cyphon/cyphondock/
+    sudo cp -R config-COPYME config
+
+    # Set up Elasticsearch and PostgreSQL data directories
+    sudo mkdir -p /opt/cyphon/data/elasticsearch
+    sudo mkdir /opt/cyphon/data/postgresql
+    sudo chown -R 1000:1000 /opt/cyphon/data/elasticsearch
+    sudo chown -R 999:999 /opt/cyphon/data/postgresql
+
+    # Build production environment
+    sudo docker-compose up -d
+
+    echo "Loading configurations"
+    sudo docker exec -it cyphondock_cyphon_1 sh -c "python manage.py loaddata ./fixtures/starter-fixtures.json"
+
+    echo "Create a user account for Cyphon"
+    echo "sudo docker exec -it cyphondock_cyphon_1 sh -c "python manage.py createsuperuser""
+
+    echo "Note: To get Twitter working, don't forget to enable the reservoir!"
+    echo "Note: You will need to add the index pattern on http://ip_addr:5601/ (cyphon-*)"
