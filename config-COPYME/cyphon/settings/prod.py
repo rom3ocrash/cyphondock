@@ -4,38 +4,46 @@
 Production Django settings for Cyphon.
 
 For more information on this Django file, see:
-https://docs.djangoproject.com/en/1.9/topics/settings/
+https://docs.djangoproject.com/en/1.11/topics/settings/
 
 For the full list of Django settings and their values, see:
-https://docs.djangoproject.com/en/1.9/ref/settings/
+https://docs.djangoproject.com/en/1.11/ref/settings/
 
 .. _source: ../_modules/cyphon/settings/prod.html
 
 """
 
 # standard library
-import logging
+import email.utils
 import os
 
 # local
 from .base import *
 
-LOGGER = logging.getLogger(__name__)
 
+#: URL for constructing link with MEDIA_URL, e.g. https://www.example.com
+BASE_URL = os.getenv('BASE_URL_PROD', 'http://localhost:8000')
+
+#: Path to directory will logs will be saved.
+LOG_DIR = BASE_DIR
+
+
+###############################################################################
+# DJANGO SETTINGS
+###############################################################################
+
+#: Whether to enable debug mode.
 DEBUG = False
 
+#: A list of all the people who get code error notifications.
 ADMINS = [
     # ('Jane Smith', 'jane@example.com'),
 ]
 
-CORS_ORIGIN_ALLOW_ALL = False
-CORS_ALLOW_CREDENTIALS = True
+if 'DJANGO_ADMIN' in os.environ:
+    ADMINS.append(email.utils.parseaddr(os.getenv('DJANGO_ADMIN')))
 
-#: URL for constructing link with MEDIA_URL, e.g. https://www.example.com
-BASE_URL = 'http://localhost:8000'
-
-LOG_DIR = BASE_DIR
-
+#: A logging configuration dictionary.
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
