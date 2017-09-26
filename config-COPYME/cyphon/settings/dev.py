@@ -4,32 +4,26 @@
 Development Django settings for Cyphon.
 
 For more information on this Django file, see:
-https://docs.djangoproject.com/en/1.9/topics/settings/
+https://docs.djangoproject.com/en/1.11/topics/settings/
 
 For the full list of Django settings and their values, see:
-https://docs.djangoproject.com/en/1.9/ref/settings/
+https://docs.djangoproject.com/en/1.11/ref/settings/
 
 .. _source: ../_modules/cyphon/settings/dev.html
 
 """
 
-# standard library
-import os
-import logging
-
 # local
 from .base import *
 
-LOGGER = logging.getLogger(__name__)
 
+#: URL for constructing link with MEDIA_URL.
+BASE_URL = os.getenv('BASE_URL_DEV', 'http://localhost:8000')
+
+#: Whether to enable debug mode.
 DEBUG = True
 
-#: URL for constructing link with MEDIA_URL
-BASE_URL = 'http://localhost:8000'
-
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
-
+#: A logging configuration dictionary.
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

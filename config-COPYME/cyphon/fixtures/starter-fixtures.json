@@ -2339,7 +2339,6 @@
       ["destination_ip"],
       ["destination_port"],
       ["dst_geoip"],
-      ["generator_id"],
       ["host"],
       ["priority"],
       ["protocol"],
@@ -4149,6 +4148,119 @@
     "enabled": true,
     "date_created": "2017-05-15 08:30:00.000000+00:00",
     "last_used": "2017-05-15 08:30:00.000000+00:00"
+  }
+},
+{
+  "model": "tags.topic",
+  "fields": {
+    "name": "Alert Classifications"
+  }
+},
+{
+  "model": "tags.topic",
+  "fields": {
+    "name": "Ports"
+  }
+},
+{
+  "model": "tags.topic",
+  "fields": {
+    "name": "Protocols"
+  }
+},
+{
+  "model": "tags.topic",
+  "fields": {
+    "name": "Intel Indicator Types"
+  }
+},
+{
+  "model": "tags.topic",
+  "fields": {
+    "name": "Intel Indicators"
+  }
+},
+{
+  "model": "tags.topic",
+  "fields": {
+    "name": "Snort Signatures"
+  }
+},
+{
+  "model": "tags.datatagger",
+  "fields": {
+    "container": ["intel"],
+    "field_name": "id_resp_p",
+    "topics": [["Ports"]],
+    "exact_match": true,
+    "create_tags": true,
+    "enabled": true
+  }
+},
+{
+  "model": "tags.datatagger",
+  "fields": {
+    "container": ["intel"],
+    "field_name": "seen_indicator",
+    "topics": [["Intel Indicators"]],
+    "exact_match": true,
+    "create_tags": true,
+    "enabled": true
+  }
+},
+{
+  "model": "tags.datatagger",
+  "fields": {
+    "container": ["intel"],
+    "field_name": "seen_indicator_type",
+    "topics": [["Intel Indicator Types"]],
+    "exact_match": true,
+    "create_tags": true,
+    "enabled": true
+  }
+},
+{
+  "model": "tags.datatagger",
+  "fields": {
+    "container": ["snort"],
+    "field_name": "classification",
+    "topics": [["Alert Classifications"]],
+    "exact_match": true,
+    "create_tags": true,
+    "enabled": true
+  }
+},
+{
+  "model": "tags.datatagger",
+  "fields": {
+    "container": ["snort"],
+    "field_name": "destination_port",
+    "topics": [["Ports"]],
+    "exact_match": true,
+    "create_tags": true,
+    "enabled": true
+  }
+},
+{
+  "model": "tags.datatagger",
+  "fields": {
+    "container": ["snort"],
+    "field_name": "protocol",
+    "topics": [["Protocols"]],
+    "exact_match": true,
+    "create_tags": true,
+    "enabled": true
+  }
+},
+{
+  "model": "tags.datatagger",
+  "fields": {
+    "container": ["snort"],
+    "field_name": "signature_id",
+    "topics": [["Snort Signatures"]],
+    "exact_match": true,
+    "create_tags": true,
+    "enabled": true
   }
 }
 ]
