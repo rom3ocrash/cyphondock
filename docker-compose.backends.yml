@@ -30,3 +30,10 @@ services:
       - ./config-COPYME/env/cyphon.env
     ports:
       - "5432:5432"
+
+  rabbit:
+    image: rabbitmq:${RABBITMQ_VER}
+    env_file:
+      - ./config/env/cyphon.env
+    ports:
+      - "5672:5672"  # RabbitMQ management plugin
