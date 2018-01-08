@@ -2670,6 +2670,7 @@
 {
   "model": "distilleries.distillery",
   "fields": {
+    "name": "Default Logs",
     "collection": ["elasticsearch", "cyphon", "default_log"],
     "container": ["syslog"],
     "is_shell": false
@@ -2678,6 +2679,7 @@
 {
   "model": "distilleries.distillery",
   "fields": {
+    "name": "Default Mail",
     "collection": ["elasticsearch", "cyphon", "default_mail"],
     "container": ["mail"],
     "is_shell": false
@@ -2686,6 +2688,7 @@
 {
   "model": "distilleries.distillery",
   "fields": {
+    "name": "DNS",
     "collection": ["elasticsearch", "cyphon", "dns"],
     "container": ["dns_log"],
     "is_shell": true
@@ -2694,6 +2697,7 @@
 {
   "model": "distilleries.distillery",
   "fields": {
+    "name": "Files",
     "collection": ["elasticsearch", "cyphon", "files"],
     "container": ["files_log"],
     "is_shell": true
@@ -2702,6 +2706,7 @@
 {
   "model": "distilleries.distillery",
   "fields": {
+    "name": "HTTP",
     "collection": ["elasticsearch", "cyphon", "http"],
     "container": ["http_log"],
     "is_shell": true
@@ -2710,6 +2715,7 @@
 {
   "model": "distilleries.distillery",
   "fields": {
+    "name": "Intel",
     "collection": ["elasticsearch", "cyphon", "intel"],
     "container": ["intel"],
     "is_shell": true
@@ -2718,6 +2724,7 @@
 {
   "model": "distilleries.distillery",
   "fields": {
+    "name": "Mail",
     "collection": ["elasticsearch", "cyphon", "mail"],
     "container": ["mail_w_attachment"],
     "is_shell": false
@@ -2726,6 +2733,7 @@
 {
   "model": "distilleries.distillery",
   "fields": {
+    "name": "Nessus",
     "collection": ["elasticsearch", "cyphon", "nessus"],
     "container": ["nessus"],
     "is_shell": true
@@ -2734,6 +2742,7 @@
 {
   "model": "distilleries.distillery",
   "fields": {
+    "name": "Social",
     "collection": ["elasticsearch", "cyphon", "social"],
     "container": ["post"],
     "is_shell": false
@@ -2742,6 +2751,7 @@
 {
   "model": "distilleries.distillery",
   "fields": {
+    "name": "Snort",
     "collection": ["elasticsearch", "cyphon", "snort"],
     "container": ["snort"],
     "is_shell": false
@@ -2750,6 +2760,7 @@
 {
   "model": "distilleries.distillery",
   "fields": {
+    "name": "SSL",
     "collection": ["elasticsearch", "cyphon", "ssl"],
     "container": ["ssl_log"],
     "is_shell": true
@@ -2758,6 +2769,7 @@
 {
   "model": "distilleries.distillery",
   "fields": {
+    "name": "Syslog",
     "collection": ["elasticsearch", "cyphon", "syslog"],
     "container": ["syslog"],
     "is_shell": true
@@ -3162,7 +3174,7 @@
   "model": "datamungers.datamunger",
   "fields": {
     "name": "tweets",
-    "distillery": ["elasticsearch", "cyphon", "social"],
+    "distillery": ["Social"],
     "condenser": ["twitter__post"]
   }
 },
@@ -3483,7 +3495,7 @@
   "model": "logmungers.logmunger",
   "fields": {
     "name": "default",
-    "distillery": ["elasticsearch", "cyphon", "default_log"],
+    "distillery": ["Default Logs"],
     "condenser": ["syslog"]
   }
 },
@@ -3491,7 +3503,7 @@
   "model": "logmungers.logmunger",
   "fields": {
     "name": "snort_alert",
-    "distillery": ["elasticsearch", "cyphon", "snort"],
+    "distillery": ["Snort"],
     "condenser": ["snort_alert"]
   }
 },
@@ -3706,7 +3718,7 @@
   "model": "mailmungers.mailmunger",
   "fields": {
     "name": "default",
-    "distillery": ["elasticsearch", "cyphon", "default_mail"],
+    "distillery": ["Default Mail"],
     "condenser": ["mail"]
   }
 },
@@ -3722,8 +3734,8 @@
   "model": "contexts.context",
   "fields": {
     "name": "DNS log",
-    "primary_distillery": ["elasticsearch", "cyphon", "snort"],
-    "related_distillery": ["elasticsearch", "cyphon", "dns"],
+    "primary_distillery": ["Snort"],
+    "related_distillery": ["DNS"],
     "before_time_interval": 30,
     "before_time_unit": "s",
     "after_time_interval": 30,
@@ -3735,8 +3747,8 @@
   "model": "contexts.context",
   "fields": {
     "name": "Files log",
-    "primary_distillery": ["elasticsearch", "cyphon", "snort"],
-    "related_distillery": ["elasticsearch", "cyphon", "files"],
+    "primary_distillery": ["Snort"],
+    "related_distillery": ["Files"],
     "before_time_interval": 30,
     "before_time_unit": "s",
     "after_time_interval": 30,
@@ -3748,8 +3760,8 @@
   "model": "contexts.context",
   "fields": {
     "name": "HTTP log",
-    "primary_distillery": ["elasticsearch", "cyphon", "snort"],
-    "related_distillery": ["elasticsearch", "cyphon", "http"],
+    "primary_distillery": ["Snort"],
+    "related_distillery": ["HTTP"],
     "before_time_interval": 30,
     "before_time_unit": "s",
     "after_time_interval": 30,
@@ -3761,8 +3773,8 @@
   "model": "contexts.context",
   "fields": {
     "name": "related snort alerts",
-    "primary_distillery": ["elasticsearch", "cyphon", "snort"],
-    "related_distillery": ["elasticsearch", "cyphon", "snort"],
+    "primary_distillery": ["Snort"],
+    "related_distillery": ["Snort"],
     "before_time_interval": 30,
     "before_time_unit": "m",
     "after_time_interval": 30,
@@ -3774,8 +3786,8 @@
   "model": "contexts.context",
   "fields": {
     "name": "Nessus scans",
-    "primary_distillery": ["elasticsearch", "cyphon", "snort"],
-    "related_distillery": ["elasticsearch", "cyphon", "nessus"],
+    "primary_distillery": ["Snort"],
+    "related_distillery": ["Nessus"],
     "before_time_interval": 7,
     "before_time_unit": "d",
     "after_time_interval": 7,
@@ -3787,8 +3799,8 @@
   "model": "contexts.context",
   "fields": {
     "name": "SSL log",
-    "primary_distillery": ["elasticsearch", "cyphon", "snort"],
-    "related_distillery": ["elasticsearch", "cyphon", "ssl"],
+    "primary_distillery": ["Snort"],
+    "related_distillery": ["SSL"],
     "before_time_interval": 30,
     "before_time_unit": "s",
     "after_time_interval": 30,
@@ -3800,8 +3812,8 @@
   "model": "contexts.context",
   "fields": {
     "name": "Syslog",
-    "primary_distillery": ["elasticsearch", "cyphon", "snort"],
-    "related_distillery": ["elasticsearch", "cyphon", "syslog"],
+    "primary_distillery": ["Snort"],
+    "related_distillery": ["Syslog"],
     "before_time_interval": 5,
     "before_time_unit": "m",
     "after_time_interval": 5,
@@ -3812,7 +3824,7 @@
 {
   "model": "contexts.contextfilter",
   "fields": {
-    "context": ["related snort alerts", "elasticsearch", "cyphon", "snort"],
+    "context": ["related snort alerts", "Snort"],
     "value_field": "signature_id",
     "search_field": "signature_id",
     "operator": "eq"
@@ -3821,7 +3833,7 @@
 {
   "model": "contexts.contextfilter",
   "fields": {
-    "context": ["related snort alerts", "elasticsearch", "cyphon", "snort"],
+    "context": ["related snort alerts", "Snort"],
     "value_field": "source_ip",
     "search_field": "source_ip",
     "operator": "eq"
@@ -3830,7 +3842,7 @@
 {
   "model": "contexts.contextfilter",
   "fields": {
-    "context": ["Files log", "elasticsearch", "cyphon", "snort"],
+    "context": ["Files log", "Snort"],
     "value_field": "destination_ip",
     "search_field": "tx_hosts",
     "operator": "in"
@@ -3839,7 +3851,7 @@
 {
   "model": "contexts.contextfilter",
   "fields": {
-    "context": ["Files log", "elasticsearch", "cyphon", "snort"],
+    "context": ["Files log", "Snort"],
     "value_field": "source_ip",
     "search_field": "rx_hosts",
     "operator": "in"
@@ -3848,7 +3860,7 @@
 {
   "model": "contexts.contextfilter",
   "fields": {
-    "context": ["DNS log", "elasticsearch", "cyphon", "snort"],
+    "context": ["DNS log", "Snort"],
     "value_field": "destination_ip",
     "search_field": "id_resp_h",
     "operator": "eq"
@@ -3857,7 +3869,7 @@
 {
   "model": "contexts.contextfilter",
   "fields": {
-    "context": ["DNS log", "elasticsearch", "cyphon", "snort"],
+    "context": ["DNS log", "Snort"],
     "value_field": "source_ip",
     "search_field": "id_orig_h",
     "operator": "eq"
@@ -3866,7 +3878,7 @@
 {
   "model": "contexts.contextfilter",
   "fields": {
-    "context": ["SSL log", "elasticsearch", "cyphon", "snort"],
+    "context": ["SSL log", "Snort"],
     "value_field": "destination_ip",
     "search_field": "id_orig_h",
     "operator": "eq"
@@ -3875,7 +3887,7 @@
 {
   "model": "contexts.contextfilter",
   "fields": {
-    "context": ["SSL log", "elasticsearch", "cyphon", "snort"],
+    "context": ["SSL log", "Snort"],
     "value_field": "source_ip",
     "search_field": "id_resp_h",
     "operator": "eq"
@@ -3884,7 +3896,7 @@
 {
   "model": "contexts.contextfilter",
   "fields": {
-    "context": ["HTTP log", "elasticsearch", "cyphon", "snort"],
+    "context": ["HTTP log", "Snort"],
     "value_field": "destination_ip",
     "search_field": "id_orig_h",
     "operator": "eq"
@@ -3893,7 +3905,7 @@
 {
   "model": "contexts.contextfilter",
   "fields": {
-    "context": ["HTTP log", "elasticsearch", "cyphon", "snort"],
+    "context": ["HTTP log", "Snort"],
     "value_field": "source_ip",
     "search_field": "id_resp_h",
     "operator": "eq"
@@ -3902,7 +3914,7 @@
 {
   "model": "contexts.contextfilter",
   "fields": {
-    "context": ["HTTP log", "elasticsearch", "cyphon", "snort"],
+    "context": ["HTTP log", "Snort"],
     "value_field": "source_ip",
     "search_field": "id_orig_h",
     "operator": "eq"
@@ -3911,7 +3923,7 @@
 {
   "model": "contexts.contextfilter",
   "fields": {
-    "context": ["HTTP log", "elasticsearch", "cyphon", "snort"],
+    "context": ["HTTP log", "Snort"],
     "value_field": "destination_ip",
     "search_field": "id_resp_h",
     "operator": "eq"
@@ -4044,7 +4056,7 @@
     "alert_level": "HIGH",
     "groups": [],
     "distilleries": [
-      ["elasticsearch", "cyphon", "intel"]
+      ["Intel"]
     ],
     "created_date": "2017-05-15 08:30:00.000000+00:00",
     "last_updated": "2017-05-15 08:30:00.000000+00:00"
@@ -4062,7 +4074,7 @@
     "alert_level": "HIGH",
     "groups": [],
     "distilleries": [
-      ["elasticsearch", "cyphon", "snort"]
+      ["Snort"]
     ],
     "created_date": "2017-05-15 08:30:00.000000+00:00",
     "last_updated": "2017-05-15 08:30:00.000000+00:00"
