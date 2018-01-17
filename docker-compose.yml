@@ -152,7 +152,6 @@ services:
     restart: always
     env_file:
       - ./config/env/cyphon.env
-    command: sh -c "echo \"host all all 0.0.0.0/0 md5\" >> /var/lib/postgresql/data/pg_hba.conf && /docker-entrypoint.sh postgres"
 
   # RabbitMQ message broker for Cyphon and Logstash
   rabbit:
