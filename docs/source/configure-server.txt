@@ -176,6 +176,9 @@ You can use the following bash script to auto install the project on an Ubuntu 1
     # Build production environment
     sudo docker-compose up -d
 
+    echo "One minute... Waiting for services to start..."
+    sleep 60
+
     echo "Loading configurations"
     sudo docker exec -it cyphondock_cyphon_1 sh -c "python manage.py loaddata ./fixtures/starter-fixtures.json"
 
