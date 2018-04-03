@@ -47,6 +47,7 @@ CODEBOOKS = {
 
 CYCLOPS = {
     'ENABLED': True,
+    'API_TIMEOUT': 30000,
     'MAPBOX_ACCESS_TOKEN': '',
     'DEVELOPMENT_ENABLED': False,
     'DEVELOPMENT_URL': 'http://localhost:8080/',
