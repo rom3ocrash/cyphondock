@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 
 services:
 
@@ -50,7 +50,8 @@ services:
       # - mongo
       - postgres
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
   # Elasticsearch storage backend
   elasticsearch:
@@ -149,6 +150,11 @@ services:
   # PostgreSQL PostGIS database for Cyphon
   postgres:
     image: mdillon/postgis:${POSTGRES_VER}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
     restart: always
     env_file:
       - ./config/env/cyphon.env

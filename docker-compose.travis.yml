@@ -1,6 +1,6 @@
 # Creates a stack for testing on Travis-CI.
 
-version: '2'
+version: '2.1'
 
 services:
 
@@ -62,10 +62,14 @@ services:
       - postgres
       - selenium
     depends_on:
-      - elasticsearch
-      - geoip
-      - mongo
-      - postgres
+      elasticsearch:
+        condition: service_started
+      geoip:
+        condition: service_started
+      mongo:
+        condition: service_started
+      postgres:
+        condition: service_healthy
     volumes:
       - ./config-COPYME/cyphon/fixtures:/usr/src/app/cyphon/fixtures:ro
     ports:
@@ -165,6 +169,11 @@ services:
   postgres:
     image: mdillon/postgis:${POSTGRES_VER}
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
     env_file:
       - ./config-COPYME/env/cyphon.env
     ports:
