@@ -2,7 +2,7 @@
 # ports on your host machine to make backend services accessible through
 # `localhost`.
 
-version: '2'
+version: '2.1'
 
 services:
 

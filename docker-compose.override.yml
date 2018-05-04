@@ -4,7 +4,7 @@
 #   - map container volumes to volumes on the host machine
 # 
 
-version: '2'
+version: '2.1'
 
 services:
 

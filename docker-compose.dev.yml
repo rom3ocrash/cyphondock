@@ -3,7 +3,7 @@
 #    - map container ports to random ports on the host machine
 #
 
-version: '2'
+version: '2.1'
 
 services:
 
