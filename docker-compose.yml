@@ -6,7 +6,7 @@ services:
   celerybeat:
     extends:
       file: common-services.yml
-      service: cyphon-prod
+      service: cyphon-dev
     restart: always
     command: ../entrypoints/run_celerybeat.sh
     volumes_from:
@@ -24,7 +24,7 @@ services:
   celeryworker:
     extends:
       file: common-services.yml
-      service: cyphon-prod
+      service: cyphon-dev
     restart: always
     command: ../entrypoints/run_celeryworker.sh
     volumes_from:
@@ -42,7 +42,7 @@ services:
   cyphon:
     extends:
       file: common-services.yml
-      service: cyphon-prod
+      service: cyphon-dev
     volumes_from:
       - geoip
     links:
@@ -78,7 +78,7 @@ services:
 
   # GeoLite2 databases for geolocating IP addresses
   geoip:
-    image: dunbar/geoip
+    build: https://github.com/controlscanmdr/geoip.git
     restart: always
 
   # Kibana dashboard for Elasticsearch data
@@ -170,7 +170,7 @@ services:
   logchutes:
     extends:
       file: common-services.yml
-      service: cyphon-prod
+      service: cyphon-dev
     restart: always
     command: ../entrypoints/run_receiver.sh logchutes
     volumes_from:
@@ -187,7 +187,7 @@ services:
   watchdogs:
     extends:
       file: common-services.yml
-      service: cyphon-prod
+      service: cyphon-dev
     restart: always
     command: ../entrypoints/run_receiver.sh watchdogs
     volumes_from:
