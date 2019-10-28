@@ -13,7 +13,7 @@ version: '2.1'
 services:
 
   cyphon-dev:
-    build: ../cyphon
+    build: https://github.com/controlscanmdr/cyphon.git
     restart: always
     env_file:
       - ./config/env/cyphon.env
