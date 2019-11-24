@@ -12,6 +12,19 @@ version: '2.1'
 
 services:
 
+  cyphondock:
+    build: https://github.com/controlscanmdr/cyphon.git
+    restart: always
+    env_file:
+      - ./config/env/cyphon.env
+    environment:
+      CYPHON_ENV: DEV
+      DJANGO_SETTINGS_MODULE: cyphon.settings.dev
+    volumes:
+      - ./config/cyphon/custom:/usr/src/app/cyphon/custom
+      - ./config/cyphon/settings:/usr/src/app/cyphon/cyphon/settings
+      - ./config/cyphon/fixtures:/usr/src/app/cyphon/fixtures
+
   cyphon-dev:
     build: https://github.com/controlscanmdr/cyphon.git
     restart: always
