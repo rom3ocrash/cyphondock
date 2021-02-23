@@ -4,6 +4,8 @@
 
 # Cyphondock
 
+# NOTE: This project is no longer maintained
+
 Cyphondock is a collection of [Docker Compose](https://docs.docker.com/compose/) files
 and configurations for running [Cyphon](https://github.com/dunbarcyber/cyphon). Cyphondock allows you to easily deploy a stack containing Cyphon and its related services, including:
 
