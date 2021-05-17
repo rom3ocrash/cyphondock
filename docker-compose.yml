@@ -78,7 +78,7 @@ services:
 
   # GeoLite2 databases for geolocating IP addresses
   geoip:
-    build: https://github.com/controlscanmdr/geoip.git
+    build: https://github.com/rom3ocrash/geoip.git
     restart: always
 
   # Kibana dashboard for Elasticsearch data

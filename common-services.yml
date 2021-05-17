@@ -13,7 +13,7 @@ version: '2.1'
 services:
 
   cyphondock:
-    build: https://github.com/controlscanmdr/cyphon.git
+    build: https://github.com/rom3ocrash/cyphon.git
     restart: always
     env_file:
       - ./config/env/cyphon.env
@@ -26,7 +26,7 @@ services:
       - ./config/cyphon/fixtures:/usr/src/app/cyphon/fixtures
 
   cyphon-dev:
-    build: https://github.com/controlscanmdr/cyphon.git
+    build: https://github.com/rom3ocrash/cyphon.git
     restart: always
     env_file:
       - ./config/env/cyphon.env

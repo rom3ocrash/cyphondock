@@ -323,7 +323,7 @@ GeoIP
 This service provides GeoLite2 databases for Cyphon's `GeoIP package <http://cyphon.readthedocs.io/en/latest/modules/lab.geoip.html>`__.
 
 =============  =========================================================
-Image          `geoip <https://hub.docker.com/r/dunbar/geoip/>`__
+Image          ` <https://hub.docker.com/r/dunbar/geoip/>`__
 =============  =========================================================
 
 **YAML**::
